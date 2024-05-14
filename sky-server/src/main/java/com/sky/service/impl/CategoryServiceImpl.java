@@ -9,6 +9,8 @@ import com.sky.dto.CategoryDTO;
 import com.sky.dto.CategoryPageQueryDTO;
 import com.sky.entity.Category;
 import com.sky.mapper.CategoryMapper;
+import com.sky.mapper.DishMapper;
+import com.sky.mapper.SetmealMapper;
 import com.sky.result.PageResult;
 import com.sky.service.CategoryService;
 import org.springframework.beans.BeanUtils;
@@ -23,6 +25,12 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
     private CategoryMapper categoryMapper;
+
+    @Autowired
+    private DishMapper dishMapper;
+
+    @Autowired
+    private SetmealMapper setmealMapper;
     /**
      * 更新分类信息
      * @param categoryDTO
@@ -79,9 +87,19 @@ public class CategoryServiceImpl implements CategoryService {
         categoryMapper.insert(category);
     }
 
+    /**
+     * 根据删除分类
+     * @param id
+     */
     @Override
-    public void deleteById(Long id) {
-        categoryMapper.deleteById(id);
+    public Integer deleteById(Long id) {
+        Integer i = dishMapper.countByCategoryId(id);
+        Integer j = setmealMapper.countByCategoryId(id);
+        if(i==0 &&j==0){
+            categoryMapper.deleteById(id);
+            return 1;
+        }
+        return 0;
     }
 
 

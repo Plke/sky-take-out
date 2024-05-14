@@ -1,5 +1,6 @@
 package com.sky.config;
 
+import com.sky.constant.FileConstant;
 import com.sky.interceptor.JwtTokenAdminInterceptor;
 import com.sky.json.JacksonObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -44,6 +45,7 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
 
     /**
      * 通过knife4j生成接口文档
+     *
      * @return
      */
     @Bean
@@ -67,16 +69,19 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
 
     /**
      * 设置静态资源映射
+     *
      * @param registry
      */
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
         log.info("开始注册静态资源映射");
         registry.addResourceHandler("/doc.html").addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+        registry.addResourceHandler("/skyImg/**").addResourceLocations("file:"+ FileConstant.LOCAL_FILE_PATH);//设置静态图片映射
     }
 
     /**
      * 扩展springMVC框架的消息转换器类
+     *
      * @param converters
      */
     @Override
@@ -84,10 +89,10 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
         log.info("开始扩展消息转换器");
         //创建一个消息转换器对象
 
-        MappingJackson2HttpMessageConverter converter= new MappingJackson2HttpMessageConverter();
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
         //需要为消息转换器设置一个对象转换器，可以将java对象序列化为json数据
         converter.setObjectMapper(new JacksonObjectMapper());
         //将自己的消息转换器加入容器
-        converters.add(0,converter);
+        converters.add(0, converter);
     }
 }

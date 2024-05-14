@@ -1,5 +1,6 @@
 package com.sky.controller.admin;
 
+import com.sky.constant.MessageConstant;
 import com.sky.dto.CategoryDTO;
 import com.sky.dto.CategoryPageQueryDTO;
 import com.sky.entity.Category;
@@ -61,20 +62,22 @@ public class CategoryController {
     @ApiOperation("删除分类")
     public Result deleteById(Long id){
         log.info("删除分类：{}",id);
-        
-        categoryService.deleteById(id);
-        
+
+        Integer s = categoryService.deleteById(id);
+        if (s == 0)
+        {
+            return Result.error(MessageConstant.CATEGORY_BE_RELATED_BY_DISH);
+        }
         return Result.success();
     }
 
-    //这个好像没有用，可以直接使用pageQuery
-    // TODO 好像多余了删除或者使用分页查询
+    //根据类型获取分类列表
     @GetMapping("/list")
     @ApiOperation("更具类型获取分类列表")
-    public Result<PageResult> getByType(Integer type){
+    public Result<List<Category>> getByType(Integer type){
 
         log.info("获取分类列表：{}",type);
         List<Category> pageResult= categoryService.getByType(type);
-        return Result.success();
+        return Result.success(pageResult);
     }
 }

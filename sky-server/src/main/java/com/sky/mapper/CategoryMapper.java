@@ -17,27 +17,30 @@ import java.util.List;
 public interface CategoryMapper {
     /**
      * 更新信息
+     *
      * @param category
      */
     @AutoFill(value = OperationType.UPDATE)
     void update(Category category);
+
     /**
      * 分页查询
+     *
      * @param categoryPageQueryDTO
      * @return
      */
-     Page<Category> pageQuery(CategoryPageQueryDTO categoryPageQueryDTO);
+    Page<Category> pageQuery(CategoryPageQueryDTO categoryPageQueryDTO);
 
-     @Insert("insert into category " +
-             "(name,type,sort,status,create_time,update_time,create_user,update_user)" +
-             "values" +
-             "(#{name},#{type},#{sort},#{status},#{createTime},#{updateTime},#{createUser},#{updateUser})")
-     @AutoFill(value = OperationType.INSERT)
+    @Insert("insert into category " +
+            "(name,type,sort,status,create_time,update_time,create_user,update_user)" +
+            "values" +
+            "(#{name},#{type},#{sort},#{status},#{createTime},#{updateTime},#{createUser},#{updateUser})")
+    @AutoFill(value = OperationType.INSERT)
     void insert(Category category);
 
-     @Delete("delete from category where id=#{id}")
+    @Delete("delete from category where id=#{id}")
     void deleteById(Long id);
 
-     @Select("select * from category where type=#{type}  order by sort  , create_time desc")
+    @Select("select * from category where type=#{type}  order by sort  , create_time desc")
     List<Category> getByType(Integer type);
 }
