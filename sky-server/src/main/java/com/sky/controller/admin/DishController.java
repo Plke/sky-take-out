@@ -75,7 +75,7 @@ public class DishController {
 
     @DeleteMapping
     @ApiOperation("根据id批量删除菜品")
-    public Result deleteByIds(Long[] ids){
+    public Result deleteByIds(@RequestParam List<Long> ids){
 
         dishService.deleteByIds(ids);
         return Result.success();

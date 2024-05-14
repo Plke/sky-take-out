@@ -31,5 +31,5 @@ public interface DishService {
 
     List<Dish> list(Long categoryId);
 
-    void deleteByIds(Long[] ids);
+    void deleteByIds(List<Long> ids);
 }
