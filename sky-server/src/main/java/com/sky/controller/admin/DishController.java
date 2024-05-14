@@ -51,7 +51,7 @@ public class DishController {
     @PostMapping("/status/{status}")
     @ApiOperation("修改菜品状态")
     public Result<String> updateStatus(@PathVariable Integer status, Long id) {
-        log.info("修改员工状态：{}，{}", status, id);
+        log.info("修改菜品状态：{}，{}", status, id);
         dishService.updateStatus(status, id);
         return Result.success();
     }
