@@ -58,3 +58,8 @@ bug复现
 修改
 设置pagehelper.reasonable=true时，pageNum<=0 时会查询第一页， pageNum>pages（超过总数时），会查询最后一页
 也就是即使传入页数大于总页数，仍然会返回数据
+
+
+## Bean
+对于部分记得使用`Bean`对象交给`IOC`管理，如`RedisTemplate`配置,否则使用默认的，配置会出错
+

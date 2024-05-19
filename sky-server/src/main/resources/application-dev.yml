@@ -13,3 +13,7 @@ sky:
     password: root
     #    不配置就默认为0
     database: 10
+
+  wechat:
+    appid: wxb7637baa5d8ccb7c
+    secret: 62b54594db94da9b29a30066960079c4

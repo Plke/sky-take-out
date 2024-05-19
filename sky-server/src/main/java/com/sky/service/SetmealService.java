@@ -7,6 +7,7 @@ import com.sky.dto.SetmealPageQueryDTO;
 import com.sky.entity.Dish;
 import com.sky.entity.Setmeal;
 import com.sky.result.PageResult;
+import com.sky.vo.DishItemVO;
 import com.sky.vo.DishVO;
 import com.sky.vo.SetmealVO;
 
@@ -25,4 +26,8 @@ public interface SetmealService {
     void updateSetmeal(SetmealDTO setmealDTO);
 
     void deleteByIds(List<Long> ids);
+
+    List<Setmeal> getByCategoryId(Long categoryId);
+
+    List<DishItemVO> getDishItemById(Long id);
 }
