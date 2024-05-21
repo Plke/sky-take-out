@@ -9,6 +9,7 @@ import com.sky.vo.SetmealVO;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class SetmealController {
 
 
     @GetMapping("/list")
+    @Cacheable(cacheNames="setmealCache" ,key="#categoryId")
     public Result<List<Setmeal>> getByCategoryId(Long categoryId){
         log.info("categoryId:{}",categoryId);
 
