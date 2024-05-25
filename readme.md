@@ -63,3 +63,13 @@ bug复现
 ## Bean
 对于部分记得使用`Bean`对象交给`IOC`管理，如`RedisTemplate`配置,否则使用默认的，配置会出错
 
+## 事务管理
+启动类上添加`@EnableTransactionManagement` 开启注解方式的事务管理
+在`SpringBoot`中，事务管理使用`@Transactional`注解，在需要开启事务的方法上添加该注解即可
+
+## 缓存
+启动类上添加`@EnableCaching`
+
+## spring task
+启动类上添加`@EnableScheduling`
+cron表达式其实就是一个字符串，通过cron表达式可以定义任务触发的时间
